@@ -10,7 +10,7 @@ class JsonController
     private $possibleTypes = [
         'air_temperature' => [
             'db_name' => 'lufttemp',
-            'unit' => '°C',
+            'unit' => 'ºC',
         ],
         'air_humidity' => [
             'db_name' => 'luftfeucht',
