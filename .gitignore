@@ -1,0 +1,9 @@
+# composer
+vendor
+composer.lock
+
+# IDE
+.idea
+
+# environment
+.env

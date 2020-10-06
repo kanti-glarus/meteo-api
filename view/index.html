@@ -1,0 +1,39 @@
+<h1>Meteo API</h1>
+
+<p>
+    This is the public API for the Meteostation at the Kantonsschule Glarus.
+    <br>If you are looking for the current data of the Meteostation, go to <a href="https://meteo.kanti-glarus.ch/" target="_blank">meteo.kanti-glarus.ch</a>.
+    <br>If you are looking for some awesome JSON-outputs, you are right here!
+</p>
+
+<h2>API Access</h2>
+
+<h3>Current Values</h3>
+<h4>Links</h4>
+<ul>
+    <li><a href="/api/1.0/json/single/air_temperature" target="_blank">/api/1.0/json/single/temperature</a></li>
+    <li><a href="/api/1.0/json/single/air_humidity" target="_blank">/api/1.0/json/single/air_humidity</a></li>
+    <li><a href="/api/1.0/json/single/air_pressure" target="_blank">/api/1.0/json/single/air_pressure</a></li>
+
+    <li><a href="/api/1.0/json/single/rainfall" target="_blank">/api/1.0/json/single/rainfall</a></li>
+    <li><a href="/api/1.0/json/single/snow" target="_blank">/api/1.0/json/single/snow</a></li>
+
+    <li><a href="/api/1.0/json/single/sunlight" target="_blank">/api/1.0/json/single/sunlight</a></li>
+    <li><a href="/api/1.0/json/single/sun_uv" target="_blank">/api/1.0/json/single/sun_uv</a></li>
+
+    <li><a href="/api/1.0/json/single/wind_speed" target="_blank">/api/1.0/json/single/wind_speed</a></li>
+    <li><a href="/api/1.0/json/single/wind_speed_max" target="_blank">/api/1.0/json/single/wind_speed_max</a></li>
+    <li><a href="/api/1.0/json/single/wind_direction" target="_blank">/api/1.0/json/single/wind_direction</a></li>
+    <li><a href="/api/1.0/json/single/wind_deviation" target="_blank">/api/1.0/json/single/wind_deviation</a></li>
+</ul>
+
+<h4>Example</h4>
+<pre>
+    Request: /api/1.0/json/single/air_temperature
+
+    Response: {
+        "air_temperature": "11.1",
+        "id": "86729",
+        "date": "2020.10.07 20:10"
+    }
+</pre>
