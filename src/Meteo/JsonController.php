@@ -77,6 +77,39 @@ class JsonController
         return $response->withHeader('Content-Type', 'application/json');
     }
 
+    public function multiple(Request $request, Response $response, $args)
+    {
+        if (!isset($_GET['start']) || !isset($_GET['stop'])) {
+            $data = [
+                'error' => '400',
+                'message' => "Start or Stop parameter was not found."
+            ];
+        }
+
+        else {
+            $start = $_GET['start'];
+            $stop = $_GET['stop'];
+            $delta_raw = "10";
+            if (isset($_GET['delta'])) {
+                $delta_raw = $_GET['delta'];
+            }
+
+            $types = [];
+
+            foreach ($this->possibleTypes as $key => $type) {
+                $types[$key] = $type['db_name'];
+            }
+
+            $delta = $delta_raw / 10;
+            $data = $this->loadDataOverTime($start, $stop, $delta, $types);
+
+        }
+
+        // Return the elements.
+        $response->getBody()->write(json_encode($data));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
     /**
      * Private functions.
      */
@@ -92,6 +125,22 @@ class JsonController
     {
         $databaseConnection = new DatabaseConnection();
         $result = $databaseConnection->loadSingleData($name, $returned_name);
+        return $result;
+    }
+
+    /**
+     * Load current data from the database, load one single element.
+     *
+     * @param $start
+     * @param $stop
+     * @param $delta
+     * @param $types
+     * @return array|bool|\mysqli_result
+     */
+    private function loadDataOverTime($start, $stop, $delta, $types)
+    {
+        $databaseConnection = new DatabaseConnection();
+        $result = $databaseConnection->loadDataOverTime($start, $stop, $delta, $types);
         return $result;
     }
 }

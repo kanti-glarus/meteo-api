@@ -23,6 +23,7 @@ $app->get('/', [new HelpController, 'showStartPage']);
 
 $app->group('/api/1.0/json', function (RouteCollectorProxy $group) {
     $group->get('/single/{type}', [new JsonController, 'single']);
+    $group->get('/multiple', [new JsonController, 'multiple']);
 });
 
 $app->run();
