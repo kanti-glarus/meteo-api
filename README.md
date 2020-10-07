@@ -4,7 +4,7 @@ This ist the API to our Meteostation on the rooftop.
 
 ## Online
 
-The test-version of the API is here: [meteo.temperli.io](https://meteo.temperli.io/)
+The test-version of the API is here: [meteo.temperli.io](https://meteo.temperli.io/).
 
 ## Running local
 
