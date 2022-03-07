@@ -77,37 +77,49 @@ class JsonController
         return $response->withHeader('Content-Type', 'application/json');
     }
 
+    /**
+     * Load multiple data as JSON
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
     public function multiple(Request $request, Response $response, $args)
     {
-        if (!isset($_GET['start']) || !isset($_GET['stop'])) {
-            $data = [
-                'error' => '400',
-                'message' => "Start or Stop parameter was not found."
-            ];
-        }
-
-        else {
-            $start = $_GET['start'];
-            $stop = $_GET['stop'];
-            $delta_raw = "10";
-            if (isset($_GET['delta'])) {
-                $delta_raw = $_GET['delta'];
-            }
-
-            $types = [];
-
-            foreach ($this->possibleTypes as $key => $type) {
-                $types[$key] = $type['db_name'];
-            }
-
-            $delta = $delta_raw / 10;
-            $data = $this->loadDataOverTime($start, $stop, $delta, $types);
-
-        }
+        $data = $this->loadMultipleData();
 
         // Return the elements.
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * Load multiple data as CSV
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
+    public function multiple_csv(Request $request, Response $response, $args)
+    {
+        $data = $this->loadMultipleData();
+        $keys = array_keys($data[0]);
+
+        $out = fopen('php://temp', 'w');
+        fputcsv($out, $keys);
+        foreach ($data as $row) {
+            fputcsv($out, array_values($row));
+        }
+        rewind($out);
+        $csvData = stream_get_contents($out);
+        fclose($out);
+
+        // Return the elements.
+        $response->getBody()->rewind();
+        $response->getBody()->write($csvData);
+        return $response->withHeader('Content-Type', 'application/csv');
     }
 
     /**
@@ -126,6 +138,31 @@ class JsonController
         $databaseConnection = new DatabaseConnection();
         $result = $databaseConnection->loadSingleData($name, $returned_name);
         return $result;
+    }
+
+    private function loadMultipleData() {
+        if (!isset($_GET['start']) || !isset($_GET['stop'])) {
+            return [
+                'error' => '400',
+                'message' => "Start or Stop parameter was not found."
+            ];
+        }
+
+        $start = $_GET['start'];
+        $stop = $_GET['stop'];
+        $delta_raw = "10";
+        if (isset($_GET['delta'])) {
+            $delta_raw = $_GET['delta'];
+        }
+
+        $types = [];
+
+        foreach ($this->possibleTypes as $key => $type) {
+            $types[$key] = $type['db_name'];
+        }
+
+        $delta = $delta_raw / 10;
+        return $this->loadDataOverTime($start, $stop, $delta, $types);
     }
 
     /**

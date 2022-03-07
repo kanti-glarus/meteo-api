@@ -26,4 +26,8 @@ $app->group('/api/1.0/json', function (RouteCollectorProxy $group) {
     $group->get('/multiple', [new JsonController, 'multiple']);
 });
 
+$app->group('/api/1.0/csv', function (RouteCollectorProxy $group) {
+    $group->get('/multiple.csv', [new JsonController, 'multiple_csv']);
+});
+
 $app->run();
