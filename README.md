@@ -1,10 +1,10 @@
 # Meteo API
 
-This ist the API to our Meteostation on the rooftop.
+This ist the API to our [Meteostation](https://meteo.kanti-glarus.ch) on the rooftop of the Kantonsschule Glarus.
 
 ## Online
 
-The test-version of the API is here: [meteo.temperli.io](https://meteo.temperli.io/).
+The current version of the API is here: [meteo.kanti-informatik.ch/](https://meteo.kanti-informatik.ch/).
 
 ## Running local
 
