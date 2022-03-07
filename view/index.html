@@ -8,7 +8,7 @@
 
 <h2>API Access</h2>
 
-<h3>Current Values</h3>
+<h3>Current Values as JSON</h3>
 <h4>Links</h4>
 <ul>
     <li><a href="/api/1.0/json/single/air_temperature" target="_blank">/api/1.0/json/single/temperature</a></li>
@@ -38,7 +38,7 @@
     }
 </pre>
 
-<h3>Values over time</h3>
+<h3>Values over time as JSON</h3>
 <h4>Links</h4>
 
 <ul>
@@ -82,3 +82,19 @@
             "date": "2020.10.06 02:40",
             ...
 </pre>
+
+<h3>Values over time as CSV-File</h3>
+<h4>Links</h4>
+
+<ul>
+    <li>
+        <a href="/api/1.0/csv/multiple.csv?start=1601942400&stop=1602055060" target="_blank">
+            /api/1.0/csv/multiple.csv?start=1601942400&stop=1602055060
+        </a>
+    </li>
+    <li>
+        <a href="/api/1.0/csv/multiple.csv?start=1601942400&stop=1602055060&delta=60" target="_blank">
+            /api/1.0/csv/multiple.csv?start=1601942400&stop=1602055060&delta=60
+        </a>
+    </li>
+</ul>
