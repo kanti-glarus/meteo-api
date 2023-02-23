@@ -6,6 +6,9 @@ use Slim\Factory\AppFactory;
 use App\Meteo\HelpController;
 use App\Meteo\JsonController;
 
+// Allow API requests from everywhere.
+header("Access-Control-Allow-Origin: *");
+
 require __DIR__ . '/../vendor/autoload.php';
 
 // .env
